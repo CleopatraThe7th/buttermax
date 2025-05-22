@@ -15,8 +15,6 @@ import * as THREE from "three";
      import tMV from '../img/gameboy_mv-high.png.ktx2?url';
      import tData from '../img/gameboy_data-high.png.ktx2?url';
      import helvetikerFontUrl from '../img/helvetiker_regular.typeface.json?url';
-     import basisTranscoderJs from '/node_modules/three/examples/jsm/libs/basis/basis_transcoder.js?url';
-     import basisTranscoderWasm from '/node_modules/three/examples/jsm/libs/basis/basis_transcoder.wasm?url';
 
      export default class Sketch {
        constructor(options) {
@@ -46,7 +44,7 @@ import * as THREE from "three";
          this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
          this.basisloader = new KTX2Loader();
-         this.basisloader.setTranscoderPath('');
+         this.basisloader.setTranscoderPath('/assets/basis/');
          this.basisloader.detectSupport(this.renderer);
 
          this.isPlaying = true;
@@ -122,7 +120,7 @@ import * as THREE from "three";
            texture.needsUpdate = true;
          }, undefined, (error) => {
            console.error('Error loading diffuse texture:', error);
-         }, basisTranscoderJs, basisTranscoderWasm);
+         });
 
          this.basisloader.load(tData, (texture) => {
            this.material.uniforms.uData.value = texture;
@@ -130,7 +128,7 @@ import * as THREE from "three";
            texture.needsUpdate = true;
          }, undefined, (error) => {
            console.error('Error loading data texture:', error);
-         }, basisTranscoderJs, basisTranscoderWasm);
+         });
 
          this.basisloader.load(tPosition, (texture) => {
            this.material.uniforms.uPosition.value = texture;
@@ -138,7 +136,7 @@ import * as THREE from "three";
            texture.needsUpdate = true;
          }, undefined, (error) => {
            console.error('Error loading position texture:', error);
-         }, basisTranscoderJs, basisTranscoderWasm);
+         });
 
          this.basisloader.load(tMV, (texture) => {
            this.material.uniforms.uMotion.value = texture;
@@ -146,7 +144,7 @@ import * as THREE from "three";
            texture.needsUpdate = true;
          }, undefined, (error) => {
            console.error('Error loading motion texture:', error);
-         }, basisTranscoderJs, basisTranscoderWasm);
+         });
 
          const fontLoader = new FontLoader();
          const material = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 1.0 });
