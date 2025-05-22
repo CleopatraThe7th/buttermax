@@ -14,6 +14,7 @@ import tDiffuse from '../img/gameboy_diffuse-high.png.ktx2?url';
 import tPosition from '../img/gameboy_position-high.png.ktx2?url';
 import tMV from '../img/gameboy_mv-high.png.ktx2?url';
 import tData from '../img/gameboy_data-high.png.ktx2?url';
+import helvetikerFontUrl from '../img/helvetiker_regular.typeface.json?url';
 
 export default class Sketch {
   constructor(options) {
