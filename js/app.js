@@ -15,6 +15,8 @@ import tPosition from '../img/gameboy_position-high.png.ktx2?url';
 import tMV from '../img/gameboy_mv-high.png.ktx2?url';
 import tData from '../img/gameboy_data-high.png.ktx2?url';
 import helvetikerFontUrl from '../img/helvetiker_regular.typeface.json?url';
+import basisTranscoderJs from '/node_modules/three/examples/jsm/libs/basis/basis_transcoder.js?url';
+import basisTranscoderWasm from '/node_modules/three/examples/jsm/libs/basis/basis_transcoder.wasm?url';
 
 export default class Sketch {
   constructor(options) {
@@ -44,7 +46,7 @@ export default class Sketch {
     this.gltfLoader.setDRACOLoader(this.dracoLoader);
 
     this.basisloader = new KTX2Loader();
-    this.basisloader.setTranscoderPath("/node_modules/three/examples/jsm/libs/basis/");
+    this.basisloader.setTranscoderPath("/assets/");
     this.basisloader.detectSupport(this.renderer);
 
     this.isPlaying = true;
@@ -141,7 +143,7 @@ export default class Sketch {
     const fontLoader = new FontLoader();
     const material = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 1.0 });
 
-    fontLoader.load('/img/helvetiker_regular.typeface.json', (font) => {
+    fontLoader.load(helvetikerFontUrl, (font) => {
       console.log('Butter font loaded successfully');
       const butterGeometry = new TextGeometry("ButterMax", {
         font: font,
@@ -156,22 +158,6 @@ export default class Sketch {
     }, undefined, (error) => {
       console.error('Error loading Butter font:', error);
     });
-
-    // fontLoader.load('/img/optimer_bold.typeface.json', (font) => {
-    //   console.log('Max font loaded successfully');
-    //   const maxGeometry = new TextGeometry("Max", {
-    //     font: font,
-    //     size: 0.30,
-    //     height: 0.01,
-    //     curveSegments: 12,
-    //   });
-    //   this.maxText = new THREE.Mesh(maxGeometry, material);
-    //   this.maxText.position.set(0.2, 0, -0.1);
-    //   this.scene.add(this.maxText);
-    //   console.log('Max text added to scene:', this.maxText);
-    // }, undefined, (error) => {
-    //   console.error('Error loading Max font:', error);
-    // });
 
     console.log('Scene children after adding objects:', this.scene.children);
   }
